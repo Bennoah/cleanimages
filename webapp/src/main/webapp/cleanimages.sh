@@ -4,16 +4,21 @@
 
 # Description: Deletes docker images from docker host (note that the images are already on docker repository)
 
-docker images > di
-
 n=$'cat di | wc -l'
 
-while [ $(cat di | wc -l) -gt 5 ]
+while [ $n -gt 5 ]
 
 do
 
-docker rmi $(awk '{print $3}' di | tail -n +18 | xargs)
+for i in $( docker images | awk '{print $3}' | grep -v IMAGES )
 
-#if
+do
+
+docker rmi -f ${i}
+
+done
+
+#docker rmi $(awk '{print $3}' di | tail -n +5 | xargs)
+
 done
 
