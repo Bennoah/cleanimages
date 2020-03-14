@@ -12,7 +12,7 @@ while [ $(cat di | wc -l) -gt 5 ]
 
 do
 
-docker rmi $(awk '{print $3}' di | tail -n +18 | xargs)
+docker rmi $(awk '{print $3}' di | tail -n +5 | xargs)
 
 #if
 done
